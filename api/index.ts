@@ -1,7 +1,7 @@
 import dns from 'dns';
 dns.setDefaultResultOrder('ipv4first');
 
-import app from '../backend/dist/app';
+import app from '../backend/src/app';
 
 export default (req: any, res: any) => {
   try {
