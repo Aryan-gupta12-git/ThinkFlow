@@ -336,6 +336,7 @@ export const WritingWorkspace: React.FC<WritingWorkspaceProps> = ({
         const errText = await response.text().catch(() => '');
         console.error('[WritingWorkspace] Server error:', response.status, errText);
         alert(`Server Error (${response.status}): ${errText || 'Unable to analyze response.'}`);
+        fetchNewTopic(topic.id, 'Analysis HTTP failure refresh');
         return;
       }
 
@@ -349,11 +350,13 @@ export const WritingWorkspace: React.FC<WritingWorkspaceProps> = ({
         setSetupStep('idle');
       } else {
         alert(data.message || 'Unable to analyze response. Please try again.');
+        fetchNewTopic(topic.id, 'Analysis data error refresh');
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error('Failed to request AI analysis:', e);
       clearInterval(messageInterval);
-      alert('Unable to connect to the analysis service. Please check your internet connection and try again.');
+      alert(`Unable to connect to the analysis service: ${e.message || String(e)}`);
+      fetchNewTopic(topic.id, 'Analysis catch block refresh');
     } finally {
       setIsLoadingFeedback(false);
       isAnalyzingRef.current = false;
