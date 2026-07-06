@@ -1,8 +1,8 @@
 import dns from 'dns';
 dns.setDefaultResultOrder('ipv4first');
 
-import app from './app';
-import { config } from './config';
+import app from '../../api/app';
+import { config } from '../../api/config';
 
 // Trigger nodemon restart watcher
 app.listen(config.PORT, () => {

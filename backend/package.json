@@ -1,12 +1,13 @@
 {
   "name": "thinkflow-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "Production-ready backend for ThinkFlow communication trainer, powered by Google Gemini 2.5 Flash",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b",
     "start": "node dist/server.js",
-    "dev": "nodemon --watch src --watch .env -e ts,env --exec ts-node src/server.ts"
+    "dev": "nodemon --watch ../api --watch .env -e ts,env --exec ts-node src/server.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
