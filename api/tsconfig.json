@@ -12,8 +12,11 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "types": ["node"],
-    "rootDir": "../",
+    "rootDir": "./",
     "outDir": "../dist/api"
   },
-  "include": ["index.ts", "../backend/src/**/*"]
+  "include": ["index.ts"],
+  "references": [
+    { "path": "../backend" }
+  ]
 }
