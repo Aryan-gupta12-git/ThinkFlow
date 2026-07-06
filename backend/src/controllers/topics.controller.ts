@@ -22,7 +22,7 @@ export const getTopic = async (req: Request, res: Response) => {
     
     return res.status(500).json({
       success: false,
-      message: 'Unable to generate topic.',
+      message: error?.message || 'Unable to generate topic.',
       error: error.message || String(error)
     });
   }

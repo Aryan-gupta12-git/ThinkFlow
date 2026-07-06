@@ -2,7 +2,7 @@ import Groq from 'groq-sdk';
 import { config } from './index';
 
 export const groq = new Groq({
-  apiKey: config.GROQ_API_KEY,
+  apiKey: config.GROQ_API_KEY || 'PLACEHOLDER_KEY',
 });
 
 export default groq;

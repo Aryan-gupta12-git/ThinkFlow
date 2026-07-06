@@ -19,6 +19,9 @@ export class GroqService {
    * Generates a single, professional, unique discussion topic
    */
   public static async generateTopic(excludeTopics: string[] = []): Promise<string> {
+    if (!config.GROQ_API_KEY || config.GROQ_API_KEY === 'PLACEHOLDER_KEY') {
+      throw new Error('GROQ_API_KEY is not configured. Please set the GROQ_API_KEY environment variable in your Vercel Project Dashboard under Settings > Environment Variables.');
+    }
     const startTime = Date.now();
 
     // 1. Select category from variety
@@ -155,6 +158,9 @@ Example output:
     topic: string,
     content: string
   ): Promise<any> {
+    if (!config.GROQ_API_KEY || config.GROQ_API_KEY === 'PLACEHOLDER_KEY') {
+      throw new Error('GROQ_API_KEY is not configured. Please set the GROQ_API_KEY environment variable in your Vercel Project Dashboard under Settings > Environment Variables.');
+    }
     const startTime = Date.now();
     const prompt = `You are an expert communication coach helping students prepare for placements, HR interviews, public speaking, and group discussions.
 

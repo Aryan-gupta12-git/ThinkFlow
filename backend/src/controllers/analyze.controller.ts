@@ -25,7 +25,7 @@ export const analyzeSpeech = async (req: Request, res: Response) => {
     
     return res.status(500).json({
       success: false,
-      message: 'Unable to analyze response.',
+      message: error?.message || 'Unable to analyze response.',
       error: error?.message || String(error)
     });
   }
