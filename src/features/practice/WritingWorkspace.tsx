@@ -329,9 +329,17 @@ export const WritingWorkspace: React.FC<WritingWorkspaceProps> = ({
           content: finalVal
         })
       });
-      const data = await response.json();
 
       clearInterval(messageInterval);
+
+      if (!response.ok) {
+        const errText = await response.text().catch(() => '');
+        console.error('[WritingWorkspace] Server error:', response.status, errText);
+        alert(`Server Error (${response.status}): ${errText || 'Unable to analyze response.'}`);
+        return;
+      }
+
+      const data = await response.json();
       console.log('[WritingWorkspace] Received API response:', data);
 
       if (data.success) {

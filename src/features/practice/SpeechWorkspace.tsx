@@ -585,9 +585,17 @@ export const SpeechWorkspace: React.FC<SpeechWorkspaceProps> = ({
           content: textToAnalyze
         })
       });
-      const data = await response.json();
-      
+
       clearInterval(messageInterval);
+
+      if (!response.ok) {
+        const errText = await response.text().catch(() => '');
+        console.error('[SpeechWorkspace] Server error:', response.status, errText);
+        alert(`Server Error (${response.status}): ${errText || 'Unable to analyze speech response.'}`);
+        return;
+      }
+
+      const data = await response.json();
       console.log('[SpeechWorkspace] Received API response:', data);
 
       if (data.success) {
