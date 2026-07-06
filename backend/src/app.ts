@@ -21,8 +21,8 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Serve static frontend assets in production mode
-if (process.env.NODE_ENV === 'production') {
+// Serve static frontend assets in production mode (except on Vercel, which serves static assets natively via CDN)
+if (process.env.NODE_ENV === 'production' && !process.env.VERCEL) {
   const distPath = path.join(__dirname, '../../dist');
   app.use(express.static(distPath));
 

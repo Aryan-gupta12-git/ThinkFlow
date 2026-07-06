@@ -1,8 +1,13 @@
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 
-// Load environment variables from the .env file in the backend directory
-dotenv.config({ path: path.join(__dirname, '../../.env') });
+// Safely resolve .env path without using __dirname (which causes ReferenceError in ES Module environments like Vercel)
+let envPath = path.join(process.cwd(), 'backend/.env');
+if (!fs.existsSync(envPath)) {
+  envPath = path.join(process.cwd(), '.env');
+}
+dotenv.config({ path: envPath });
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
